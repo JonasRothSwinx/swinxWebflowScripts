@@ -1,7 +1,7 @@
 // alert("AAAAAAAH");
 console.log("I'm here!");
 $(document).ready(function () {
-    const packageSelect = $(".packageSelect");
+    const packageSelect = $(".packageselect");
     const $checkboxWrapper = $("div.stylecheckboxes");
     console.log($checkboxWrapper);
     console.log(packageSelect);
