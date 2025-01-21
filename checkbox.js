@@ -9,9 +9,9 @@ $(document).ready(function () {
     packageSelect.on("change", function () {
         console.log("I'm here!");
         const selectedOption = $(this).find("option:selected");
-        console.log(selectedOption);
-        maxOptions = parseInt(selectedOption.value);
-        console.log({ maxOptions, optionValue: selectedOption.value });
+        console.log(selectedOption.data("value"));
+        maxOptions = parseInt(selectedOption.data("value"));
+        console.log({ maxOptions, optionValue: selectedOption.data("value") });
         $checkboxWrapper.find("input[type=checkbox]").prop("checked", false);
         $checkboxWrapper.find("label").css({ opacity: "", "pointer-events": "" });
     });
