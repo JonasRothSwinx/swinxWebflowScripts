@@ -1,18 +1,15 @@
 // alert("AAAAAAAH");
 console.log("I'm here!");
 $(document).ready(function () {
-    const packageSelect = $(".packageselect");
+    const packageSelect = $("select.packageselect");
     const $checkboxWrapper = $("div.stylecheckboxes");
     console.log($checkboxWrapper);
     console.log(packageSelect);
     let maxOptions = 1;
     packageSelect.on("change", function () {
         console.log("I'm here!");
-        console.log(packageSelect.val());
-        const selectedOption = $(this).find("option:selected");
-        console.log(selectedOption.data("value"));
-        maxOptions = parseInt(selectedOption.data("value"));
-        console.log({ maxOptions, optionValue: selectedOption.data("value") });
+        const newValue = parseInt($(this).val());
+        maxOption = newValue;
         $checkboxWrapper.find("input[type=checkbox]").prop("checked", false);
         $checkboxWrapper.find("label").css({ opacity: "", "pointer-events": "" });
     });
