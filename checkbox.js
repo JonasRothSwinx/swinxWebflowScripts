@@ -10,7 +10,7 @@ $(document).ready(function () {
         console.log("I'm here!");
         const selectedOption = $(this).find("option:selected");
         console.log(selectedOption);
-        maxOptions = parseInt(selectedOption.data("max-options"));
+        maxOptions = parseInt(selectedOption.value);
         console.log(maxOptions);
         $checkboxWrapper.find("input[type=checkbox]").prop("checked", false);
         $checkboxWrapper.find("label").css({ opacity: "", "pointer-events": "" });
