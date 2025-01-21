@@ -11,7 +11,7 @@ $(document).ready(function () {
         const selectedOption = $(this).find("option:selected");
         console.log(selectedOption);
         maxOptions = parseInt(selectedOption.value);
-        console.log(maxOptions);
+        console.log({ maxOptions, optionValue: selectedOption.value });
         $checkboxWrapper.find("input[type=checkbox]").prop("checked", false);
         $checkboxWrapper.find("label").css({ opacity: "", "pointer-events": "" });
     });
