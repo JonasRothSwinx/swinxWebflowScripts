@@ -1,4 +1,4 @@
-alert("AAAAAAAH");
+// alert("AAAAAAAH");
 console.log("I'm here!");
 $(document).ready(function () {
     var $checkboxWrapper = $("div.stylecheckboxwrapper1");
