@@ -1,7 +1,7 @@
 alert("AAAAAAAH");
 console.log("I'm here!");
 $(document).ready(function () {
-    var $checkboxWrapper = $("div.styleCheckBoxWrapper1");
+    var $checkboxWrapper = $("div.stylecheckboxwrapper1");
 
     $checkboxWrapper.find("input[type=checkbox]").on("change", function () {
         if ($checkboxWrapper.find("input[type=checkbox]:checked").length > 3) {
