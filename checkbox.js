@@ -17,11 +17,11 @@ $(document).ready(function () {
     });
 
     $checkboxWrapper.find("input[type=checkbox]").on("change", function () {
-        if ($checkboxWrapper.find("input[type=checkbox]:checked").length > 3) {
+        if ($checkboxWrapper.find("input[type=checkbox]:checked").length > maxOptions) {
             $(this).prop("checked", false).change();
         }
 
-        if ($checkboxWrapper.find("input[type=checkbox]:checked").length === 3) {
+        if ($checkboxWrapper.find("input[type=checkbox]:checked").length === maxOptions) {
             $checkboxWrapper
                 .find("input[type=checkbox]:not(:checked)")
                 .closest("label")
