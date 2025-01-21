@@ -8,6 +8,7 @@ $(document).ready(function () {
     let maxOptions = 1;
     packageSelect.on("change", function () {
         console.log("I'm here!");
+        console.log(packageSelect.val());
         const selectedOption = $(this).find("option:selected");
         console.log(selectedOption.data("value"));
         maxOptions = parseInt(selectedOption.data("value"));
