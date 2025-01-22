@@ -17,14 +17,8 @@ $(() => {
 
     [packageElements.small, packageElements.medium, packageElements.large].forEach(
         (element, index) => {
-            element.find("button").on("click", function () {
-                maxOptions = index + 1;
-                console.log("Paket", index + 1);
-                const price = totalPrices[index];
-                updatePrices(price);
-                $checkboxWrapper.find("input[type=checkbox]").prop("checked", false);
-                $checkboxWrapper.find("label").css({ opacity: "", "pointer-events": "" });
-            });
+            const button = element.find("a");
+
             element.on("click", function () {
                 maxOptions = index + 1;
                 console.log("Paket", index + 1);
@@ -32,6 +26,10 @@ $(() => {
                 updatePrices(price);
                 $checkboxWrapper.find("input[type=checkbox]").prop("checked", false);
                 $checkboxWrapper.find("label").css({ opacity: "", "pointer-events": "" });
+                Object.values(packageElements).forEach((element) =>
+                    element.removeClass("paketAktiv"),
+                );
+                element.addClass("paketAktiv");
             });
         },
     );
