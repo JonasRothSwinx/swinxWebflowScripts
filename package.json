@@ -4,7 +4,9 @@
     "description": "Scripts for use on the swinx homepage",
     "scripts": {
         "publish": "npm run build  && npm run commit && npm run push",
-        "build": "webpack --config ./webpack/webpack.config.ts",
+        "publishDebug": "npm run buildDev  && npm run commit && npm run push",
+        "build": "webpack --config ./webpack/webpack.config.ts --mode production",
+        "buildDev": "webpack --config ./webpack/webpack.config.ts --mode development ",
         "commit": "git add . && git commit -m \"auto commit\" ",
         "push": "git push",
         "test": "echo \"Error: no test specified\" && exit 1"
