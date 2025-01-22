@@ -71,7 +71,7 @@ function updatePrices(total: number) {
     console.log({ preTaxText, taxText, totalText });
     const tax = Math.round((total / 119) * 1900) / 100;
     const preTax = total - tax;
-    preTaxText.text(`${preTax} €`);
-    taxText.text(`${tax} €`);
-    totalText.text(`${total} €`);
+    preTaxText.text(`${preTax.toFixed(2)} €`);
+    taxText.text(`${tax.toFixed(2)} €`);
+    totalText.text(`${total.toFixed(2)} €`);
 }
