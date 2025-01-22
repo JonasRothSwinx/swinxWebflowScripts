@@ -34,10 +34,8 @@ $(() => {
                 checkboxWrapper.find("input[type=checkbox]").prop("checked", false);
                 checkboxWrapper.find("label").css({ opacity: "", "pointer-events": "" });
 
-                Object.values(packageElements).forEach((element) =>
-                    element.removeClass("paketaktiv"),
-                );
-                element.addClass("paketaktiv");
+                Object.values(packageElements).forEach((element) => element.removeClass("active"));
+                element.addClass("active");
             });
         },
     );
