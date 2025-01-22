@@ -19,8 +19,7 @@ $(() => {
     const defaultIndex = 2;
     let maxOptions = 2;
     updatePrices(totalPrices[defaultIndex]);
-    paypalButtons.forEach((button) => button.hide());
-    paypalButtons[defaultIndex].show();
+    showPaypalButton(defaultIndex);
 
     [packageElements.small, packageElements.medium, packageElements.large].forEach(
         (element, index) => {
@@ -36,6 +35,8 @@ $(() => {
 
                 Object.values(packageElements).forEach((element) => element.removeClass("active"));
                 element.addClass("active");
+
+                showPaypalButton(index);
             });
         },
     );
@@ -64,6 +65,17 @@ function getPackageElements() {
 function getPaypalButtons() {
     const [small, medium, large] = [$("#paypalSmall"), $("#paypalMedium"), $("#paypalLarge")];
     return [small, medium, large];
+}
+
+function showPaypalButton(index: number) {
+    const buttons = getPaypalButtons();
+    buttons.forEach((button, i) => {
+        if (i === index) {
+            button.css({ display: "block" });
+        } else {
+            button.css({ display: "none" });
+        }
+    });
 }
 
 function updatePrices(total: number) {
