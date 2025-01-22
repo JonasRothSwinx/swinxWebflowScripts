@@ -3,7 +3,10 @@
     "version": "1.0.0",
     "description": "Scripts for use on the swinx homepage",
     "scripts": {
+        "publish": "npm run build  && npm run commit && npm run push",
         "build": "webpack --mode production --config ./webpack/webpack.config.ts",
+        "commit": "git add . && git commit -m \"auto commit\" ",
+        "push": "git push",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
