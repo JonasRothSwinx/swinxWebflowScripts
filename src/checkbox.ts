@@ -71,9 +71,11 @@ function showPaypalButton(index: number) {
     const buttons = getPaypalButtons();
     buttons.forEach((button, i) => {
         if (i === index) {
-            button.css({ display: "block" });
+            // button.css({ display: "block" });
+            button.show();
         } else {
-            button.css({ display: "none" });
+            // button.css({ display: "none" });
+            button.hide();
         }
     });
 }
