@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Scripts for use on the swinx homepage",
     "scripts": {
-        "build": "webpack",
+        "build": "webpack --mode production --config ./webpack/webpack.config.ts",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {

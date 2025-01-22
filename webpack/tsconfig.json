@@ -8,16 +8,13 @@
         "lib": ["ES2021", "dom", "DOM.Iterable"],
         "sourceMap": true,
         "outDir": "dist/js",
-        "rootDir": "./src",
+        "rootDir": "./",
         "noEmitOnError": true,
         "skipLibCheck": true,
 
         "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true,
-        "paths": {
-            "@/*": ["src/*"]
-        }
+        "esModuleInterop": true
     },
-    "include": ["src/**/*"],
+    "include": ["./**/*"],
     "exclude": ["node_modules", "**/node_modules/*"]
 }

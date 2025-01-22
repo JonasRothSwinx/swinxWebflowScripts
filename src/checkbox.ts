@@ -1,17 +1,19 @@
 import $ from "jquery";
 
 console.log("I'm here!");
-$(document).ready(function () {
-    const packageSelect = $("select.packageselect");
-    const $checkboxWrapper = $("div.stylecheckboxes");
-    console.log($checkboxWrapper);
-    console.log(packageSelect);
+$(() => {
+    // const packageSelect = $("select.packageselect");
+    const $checkboxWrapper = $("div:has(#styleSelectTitle)");
+    const packageElements = getPackageElements();
+    const checkoutTotal = $("div#checkoutTotal");
+
+    // console.log($checkboxWrapper);
+    // console.log(packageSelect);
+
     let maxOptions = 1;
-    packageSelect.on("change", function () {
-        console.log("I'm here!");
-        const val = $(this).val();
-        const newValue = parseInt(val as string);
-        maxOptions = newValue;
+
+    packageElements.small.on("click", function () {
+        maxOptions = 1;
         $checkboxWrapper.find("input[type=checkbox]").prop("checked", false);
         $checkboxWrapper.find("label").css({ opacity: "", "pointer-events": "" });
     });
@@ -31,3 +33,8 @@ $(document).ready(function () {
         }
     });
 });
+
+function getPackageElements() {
+    const [small, medium, large] = [$("div#paketSmall"), $("div#paketMedium"), $("div#paketLarge")];
+    return { small, medium, large };
+}
