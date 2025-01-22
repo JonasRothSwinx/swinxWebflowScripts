@@ -4,6 +4,7 @@ const totalPrices = [50, 100, 150];
 
 console.log("I'm here!");
 $(() => {
+    updatePrices(totalPrices[1]);
     // const packageSelect = $("select.packageselect");
     const $checkboxWrapper = $("div:has(#styleSelectTitle)");
     const packageElements = getPackageElements();
@@ -60,7 +61,7 @@ function updatePrices(total: number) {
     console.log({ preTaxText, taxText, totalText });
     const tax = Math.round((total / 119) * 1900) / 100;
     const preTax = total - tax;
-    preTaxText.text(preTax);
-    taxText.text(tax);
-    totalText.text(total);
+    preTaxText.text(`${preTax} €`);
+    taxText.text(`${tax} €`);
+    totalText.text(`${total} €`);
 }
