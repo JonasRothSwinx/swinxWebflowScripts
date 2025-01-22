@@ -1,4 +1,5 @@
-// alert("AAAAAAAH");
+import $ from "jquery";
+
 console.log("I'm here!");
 $(document).ready(function () {
     const packageSelect = $("select.packageselect");
@@ -8,7 +9,8 @@ $(document).ready(function () {
     let maxOptions = 1;
     packageSelect.on("change", function () {
         console.log("I'm here!");
-        const newValue = parseInt($(this).val());
+        const val = $(this).val();
+        const newValue = parseInt(val as string);
         maxOptions = newValue;
         $checkboxWrapper.find("input[type=checkbox]").prop("checked", false);
         $checkboxWrapper.find("label").css({ opacity: "", "pointer-events": "" });

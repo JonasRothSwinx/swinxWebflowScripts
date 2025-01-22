@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "plugins": [{ "name": "typescript-plugin-css-modules" }],
+        "baseUrl": ".",
+        "module": "CommonJS",
+        "target": "ES2023",
+        "lib": ["ES2021", "dom", "DOM.Iterable"],
+        "sourceMap": true,
+        "outDir": "dist/js",
+        "rootDir": "./",
+        "noEmitOnError": true,
+        "skipLibCheck": true,
+
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "paths": {
+            "@/*": ["src/*"]
+        }
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "**/node_modules/*"]
+}

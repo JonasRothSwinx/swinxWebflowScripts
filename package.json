@@ -1,0 +1,33 @@
+{
+    "name": "swinxwebflowscripts",
+    "version": "1.0.0",
+    "description": "Scripts for use on the swinx homepage",
+    "scripts": {
+        "build": "webpack",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/JonasRothSwinx/swinxWebflowScripts.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/JonasRothSwinx/swinxWebflowScripts/issues"
+    },
+    "homepage": "https://github.com/JonasRothSwinx/swinxWebflowScripts#readme",
+    "devDependencies": {
+        "@types/jquery": "^3.5.32",
+        "@types/node": "^22.10.7",
+        "@types/webpack": "^5.28.5",
+        "@types/webpack-dev-server": "^4.7.1",
+        "ts-loader": "^9.5.2",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.7.3",
+        "webpack": "^5.97.1",
+        "webpack-cli": "^6.0.1"
+    },
+    "dependencies": {
+        "jquery": "^3.7.1"
+    }
+}
