@@ -17,6 +17,14 @@ $(() => {
 
     [packageElements.small, packageElements.medium, packageElements.large].forEach(
         (element, index) => {
+            element.find("button").on("click", function () {
+                maxOptions = index + 1;
+                console.log("Paket", index + 1);
+                const price = totalPrices[index];
+                updatePrices(price);
+                $checkboxWrapper.find("input[type=checkbox]").prop("checked", false);
+                $checkboxWrapper.find("label").css({ opacity: "", "pointer-events": "" });
+            });
             element.on("click", function () {
                 maxOptions = index + 1;
                 console.log("Paket", index + 1);
@@ -51,6 +59,7 @@ function getPackageElements() {
 
 function updatePrices(total: number) {
     const [preTaxText, taxText, totalText] = [$("#pricePreTax"), $("#priceTax"), $("#priceTotal")];
+    console.log({ preTaxText, taxText, totalText });
     const tax = Math.round((total / 119) * 1900) / 100;
     const preTax = total - tax;
     preTaxText.text(preTax);
