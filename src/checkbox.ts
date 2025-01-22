@@ -6,40 +6,25 @@ console.log("I'm here!");
 $(() => {
     // const packageSelect = $("select.packageselect");
     const checkboxWrapper = $("div#styleSelection");
-    const styleSelectTitle = checkboxWrapper.find("#styleSelectTitle");
     const packageElements = getPackageElements();
-    const checkoutTotal = $("div#checkoutTotal");
-    const paypalButtons = getPaypalButtons();
 
     // console.log($checkboxWrapper);
     // console.log(packageSelect);
     console.log({ packageElements, $checkboxWrapper: checkboxWrapper });
 
     //initialize state
-    const defaultIndex = 2;
-    let maxOptions = 2;
-    updatePrices(totalPrices[defaultIndex]);
-    showPaypalButton(defaultIndex);
+    const defaultIndex = 1;
+    let maxOptions = defaultIndex + 1;
+    setActivePackage(defaultIndex);
 
-    [packageElements.small, packageElements.medium, packageElements.large].forEach(
-        (element, index) => {
-            const button = element.find("a");
+    packageElements.forEach((element, index) => {
+        const button = element.find("a");
 
-            element.on("click", function () {
-                maxOptions = index + 1;
-                console.log("Paket", index + 1);
-                const price = totalPrices[index];
-                updatePrices(price);
-                checkboxWrapper.find("input[type=checkbox]").prop("checked", false);
-                checkboxWrapper.find("label").css({ opacity: "", "pointer-events": "" });
-
-                Object.values(packageElements).forEach((element) => element.removeClass("active"));
-                element.addClass("active");
-
-                showPaypalButton(index);
-            });
-        },
-    );
+        element.on("click", function () {
+            maxOptions = index + 1;
+            setActivePackage(index);
+        });
+    });
 
     checkboxWrapper.find("input[type=checkbox]").on("change", function () {
         if (checkboxWrapper.find("input[type=checkbox]:checked").length > maxOptions) {
@@ -59,7 +44,7 @@ $(() => {
 
 function getPackageElements() {
     const [small, medium, large] = [$("div#paketSmall"), $("div#paketMedium"), $("div#paketLarge")];
-    return { small, medium, large };
+    return [small, medium, large];
 }
 
 function getPaypalButtons() {
@@ -88,4 +73,27 @@ function updatePrices(total: number) {
     preTaxText.text(`${preTax.toFixed(2)} €`);
     taxText.text(`${tax.toFixed(2)} €`);
     totalText.text(`${total.toFixed(2)} €`);
+}
+
+function setStyleTitle(index: number) {
+    const styleTitle = $("#styleSelectTitle");
+    const currentText = styleTitle.text();
+    //Replace 1-3 Style(s) with the current style amount. include the s if there is more than one style
+    const newText = currentText.replace(
+        /\d+ Style\(s\)/,
+        `${index + 1} Style${index > 0 ? "s" : ""}`,
+    );
+    styleTitle.text(newText);
+}
+
+function setActivePackage(index: number) {
+    const packageElements = getPackageElements();
+    Object.values(packageElements).forEach((element) => element.removeClass("active"));
+    packageElements[index].addClass("active");
+    const checkboxWrapper = $("div#styleSelection");
+    checkboxWrapper.find("input[type=checkbox]").prop("checked", false);
+    checkboxWrapper.find("label").css({ opacity: "", "pointer-events": "" });
+    updatePrices(totalPrices[index]);
+    showPaypalButton(index);
+    setStyleTitle(index);
 }
