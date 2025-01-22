@@ -80,7 +80,7 @@ function setStyleTitle(index: number) {
     const currentText = styleTitle.text();
     //Replace 1-3 Style(s) with the current style amount. include the s if there is more than one style
     const newText = currentText.replace(
-        /\d+ Style\(s\)/,
+        /\d+ Style(s)*/,
         `${index + 1} Style${index > 0 ? "s" : ""}`,
     );
     styleTitle.text(newText);
