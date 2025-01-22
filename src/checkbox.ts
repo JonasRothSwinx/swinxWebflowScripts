@@ -11,6 +11,7 @@ $(() => {
 
     // console.log($checkboxWrapper);
     // console.log(packageSelect);
+    console.log({ packageElements, $checkboxWrapper });
 
     let maxOptions = 1;
 
@@ -19,6 +20,8 @@ $(() => {
             element.on("click", function () {
                 maxOptions = index + 1;
                 console.log("Paket", index + 1);
+                const price = totalPrices[index];
+                updatePrices(price);
                 $checkboxWrapper.find("input[type=checkbox]").prop("checked", false);
                 $checkboxWrapper.find("label").css({ opacity: "", "pointer-events": "" });
             });
