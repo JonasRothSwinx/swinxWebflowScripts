@@ -4,17 +4,23 @@ const totalPrices = [50, 100, 150];
 
 console.log("I'm here!");
 $(() => {
-    updatePrices(totalPrices[1]);
     // const packageSelect = $("select.packageselect");
-    const $checkboxWrapper = $("div:has(#styleSelectTitle)");
+    const checkboxWrapper = $("div#styleSelection");
+    const styleSelectTitle = checkboxWrapper.find("#styleSelectTitle");
     const packageElements = getPackageElements();
     const checkoutTotal = $("div#checkoutTotal");
+    const paypalButtons = getPaypalButtons();
 
     // console.log($checkboxWrapper);
     // console.log(packageSelect);
-    console.log({ packageElements, $checkboxWrapper });
+    console.log({ packageElements, $checkboxWrapper: checkboxWrapper });
 
-    let maxOptions = 1;
+    //initialize state
+    const defaultIndex = 2;
+    let maxOptions = 2;
+    updatePrices(totalPrices[defaultIndex]);
+    paypalButtons.forEach((button) => button.hide());
+    paypalButtons[defaultIndex].show();
 
     [packageElements.small, packageElements.medium, packageElements.large].forEach(
         (element, index) => {
@@ -25,28 +31,29 @@ $(() => {
                 console.log("Paket", index + 1);
                 const price = totalPrices[index];
                 updatePrices(price);
-                $checkboxWrapper.find("input[type=checkbox]").prop("checked", false);
-                $checkboxWrapper.find("label").css({ opacity: "", "pointer-events": "" });
+                checkboxWrapper.find("input[type=checkbox]").prop("checked", false);
+                checkboxWrapper.find("label").css({ opacity: "", "pointer-events": "" });
+
                 Object.values(packageElements).forEach((element) =>
-                    element.removeClass("paketAktiv"),
+                    element.removeClass("paketaktiv"),
                 );
-                element.addClass("paketAktiv");
+                element.addClass("paketaktiv");
             });
         },
     );
 
-    $checkboxWrapper.find("input[type=checkbox]").on("change", function () {
-        if ($checkboxWrapper.find("input[type=checkbox]:checked").length > maxOptions) {
+    checkboxWrapper.find("input[type=checkbox]").on("change", function () {
+        if (checkboxWrapper.find("input[type=checkbox]:checked").length > maxOptions) {
             $(this).prop("checked", false).change();
         }
 
-        if ($checkboxWrapper.find("input[type=checkbox]:checked").length === maxOptions) {
-            $checkboxWrapper
+        if (checkboxWrapper.find("input[type=checkbox]:checked").length === maxOptions) {
+            checkboxWrapper
                 .find("input[type=checkbox]:not(:checked)")
                 .closest("label")
                 .css({ opacity: "0.5", "pointer-events": "none" });
         } else {
-            $checkboxWrapper.find("label").css({ opacity: "", "pointer-events": "" });
+            checkboxWrapper.find("label").css({ opacity: "", "pointer-events": "" });
         }
     });
 });
@@ -54,6 +61,11 @@ $(() => {
 function getPackageElements() {
     const [small, medium, large] = [$("div#paketSmall"), $("div#paketMedium"), $("div#paketLarge")];
     return { small, medium, large };
+}
+
+function getPaypalButtons() {
+    const [small, medium, large] = [$("#paypalSmall"), $("#paypalMedium"), $("#paypalLarge")];
+    return [small, medium, large];
 }
 
 function updatePrices(total: number) {
