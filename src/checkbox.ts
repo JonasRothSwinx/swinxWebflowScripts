@@ -10,7 +10,7 @@ $(() => {
 
     // console.log($checkboxWrapper);
     // console.log(packageSelect);
-    console.log({ packageElements, $checkboxWrapper: checkboxWrapper });
+    // console.log({ packageElements, $checkboxWrapper: checkboxWrapper });
 
     //initialize state
     const defaultIndex = 1;
@@ -67,7 +67,7 @@ function showPaypalButton(index: number) {
 
 function updatePrices(total: number) {
     const [preTaxText, taxText, totalText] = [$("#pricePreTax"), $("#priceTax"), $("#priceTotal")];
-    console.log({ preTaxText, taxText, totalText });
+    // console.log({ preTaxText, taxText, totalText });
     const tax = Math.round((total / 119) * 1900) / 100;
     const preTax = total - tax;
     preTaxText.text(`${preTax.toFixed(2)} €`);
