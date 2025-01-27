@@ -43,13 +43,16 @@ $(() => {
 
     packageElements.forEach((element, index) => {
         const button = element.find("a");
-        element.find("#price").text(
-            `${packages[index].price.toLocaleString("de-DE", {
-                style: "currency",
-                currency: "EUR",
-                minimumFractionDigits: 0,
-            })}`
-        );
+        element
+            .find("#price")
+            .text(
+                `${packages[index].price.toLocaleString("de-DE", {
+                    style: "currency",
+                    currency: "EUR",
+                    minimumFractionDigits: 0,
+                })}`
+            )
+            .show();
         element.on("click", function () {
             maxOptions = packages[index].styles;
             const updateStyleAmount = packages[index].styles !== maxOptions;
