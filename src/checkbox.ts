@@ -1,9 +1,31 @@
 import $ from "jquery";
 
-const totalPrices = [50, 100, 150];
+type Package = {
+    name: string;
+    price: number;
+    styles: number;
+};
+const packages: Package[] = [
+    {
+        name: "Starter",
+        price: 9,
+        styles: 2,
+    },
+    {
+        name: "Grow",
+        price: 75,
+        styles: 2,
+    },
+    {
+        name: "Scale",
+        price: 150,
+        styles: 2,
+    },
+];
 
 console.log("I'm here!");
 $(() => {
+    const queryParams = new URLSearchParams(window.location.search);
     // const packageSelect = $("select.packageselect");
     const checkboxWrapper = $("div#styleSelection");
     const packageElements = getPackageElements();
@@ -13,7 +35,7 @@ $(() => {
     // console.log({ packageElements, $checkboxWrapper: checkboxWrapper });
 
     //initialize state
-    const defaultIndex = 1;
+    const defaultIndex = parseInt(queryParams.get("pack") || "0", 10);
     let maxOptions = defaultIndex + 1;
     setActivePackage(defaultIndex);
 
@@ -79,10 +101,7 @@ function setStyleTitle(index: number) {
     const styleTitle = $("#styleSelectTitle");
     const currentText = styleTitle.text();
     //Replace 1-3 Style(s) with the current style amount. include the s if there is more than one style
-    const newText = currentText.replace(
-        /\d+ Style(s)*/,
-        `${index + 1} Style${index > 0 ? "s" : ""}`,
-    );
+    const newText = currentText.replace(/\d+ Style(s)*/, `${index + 1} Style${index > 0 ? "s" : ""}`);
     styleTitle.text(newText);
 }
 
@@ -93,7 +112,7 @@ function setActivePackage(index: number) {
     const checkboxWrapper = $("div#styleSelection");
     checkboxWrapper.find("input[type=checkbox]").prop("checked", false);
     checkboxWrapper.find("label").css({ opacity: "", "pointer-events": "" });
-    updatePrices(totalPrices[index]);
+    updatePrices(packages[index].price);
     showPaypalButton(index);
     setStyleTitle(index);
 }
