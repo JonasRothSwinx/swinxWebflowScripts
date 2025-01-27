@@ -25,16 +25,16 @@ const packages: Package[] = [
 
 const queryParams = new URLSearchParams(window.location.search);
 window.history.replaceState({}, document.title, window.location.pathname);
-console.log("I'm here!");
-getPackageElements().forEach((element, index) => {
-    element.find("#price").text(
-        packages[index].price.toLocaleString("de-DE", {
-            style: "currency",
-            currency: "EUR",
-            minimumFractionDigits: 0,
-        })
-    );
-});
+// console.log("I'm here!");
+// getPackageElements().forEach((element, index) => {
+//     element.find("#price").text(
+//         packages[index].price.toLocaleString("de-DE", {
+//             style: "currency",
+//             currency: "EUR",
+//             minimumFractionDigits: 0,
+//         })
+//     );
+// });
 $(() => {
     //remove query params
     // const packageSelect = $("select.packageselect");
@@ -52,16 +52,16 @@ $(() => {
 
     packageElements.forEach((element, index) => {
         const button = element.find("a");
-        // element
-        //     .find("#price")
-        //     .text(
-        //         `${packages[index].price.toLocaleString("de-DE", {
-        //             style: "currency",
-        //             currency: "EUR",
-        //             minimumFractionDigits: 0,
-        //         })}`
-        //     )
-        //     .show();
+        element
+            .find("#price")
+            .text(
+                `${packages[index].price.toLocaleString("de-DE", {
+                    style: "currency",
+                    currency: "EUR",
+                    minimumFractionDigits: 0,
+                })}`
+            )
+            .show();
         element.on("click", function () {
             maxOptions = packages[index].styles;
             const updateStyleAmount = packages[index].styles !== maxOptions;
