@@ -37,8 +37,8 @@ $(() => {
     // console.log({ packageElements, $checkboxWrapper: checkboxWrapper });
 
     //initialize state
-    const defaultIndex = parseInt(queryParams.get("pack") || "0", 10);
-    let maxOptions = defaultIndex + 1;
+    const defaultIndex = parseInt(queryParams.get("pack") || "1", 10);
+    let maxOptions = packages[defaultIndex].styles;
     setActivePackage(defaultIndex);
 
     packageElements.forEach((element, index) => {
@@ -109,7 +109,7 @@ function setStyleTitle(index: number) {
     styleTitle.text(newText);
 }
 
-function setActivePackage(index: number, updateStyleAmount = false) {
+function setActivePackage(index: number, updateStyleAmount = true) {
     const packageElements = getPackageElements();
     Object.values(packageElements).forEach((element) => element.removeClass("active"));
     packageElements[index].addClass("active");
