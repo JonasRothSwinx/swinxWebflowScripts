@@ -8,7 +8,7 @@ type Package = {
 const packages: Package[] = [
     {
         name: "Starter",
-        price: 9,
+        price: 9.55,
         styles: 2,
     },
     {
