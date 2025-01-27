@@ -8,7 +8,7 @@ type Package = {
 const packages: Package[] = [
     {
         name: "Starter",
-        price: 9.55,
+        price: 9,
         styles: 2,
     },
     {
@@ -18,23 +18,23 @@ const packages: Package[] = [
     },
     {
         name: "Scale",
-        price: 15000,
+        price: 150,
         styles: 2,
     },
 ];
 
 const queryParams = new URLSearchParams(window.location.search);
 window.history.replaceState({}, document.title, window.location.pathname);
-// console.log("I'm here!");
-// getPackageElements().forEach((element, index) => {
-//     element.find("#price").text(
-//         packages[index].price.toLocaleString("de-DE", {
-//             style: "currency",
-//             currency: "EUR",
-//             minimumFractionDigits: 0,
-//         })
-//     );
-// });
+console.log("I'm here!");
+getPackageElements().forEach((element, index) => {
+    element.find("#price").text(
+        packages[index].price.toLocaleString("de-DE", {
+            style: "currency",
+            currency: "EUR",
+            minimumFractionDigits: 0,
+        })
+    );
+});
 $(() => {
     //remove query params
     // const packageSelect = $("select.packageselect");
