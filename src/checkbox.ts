@@ -23,11 +23,11 @@ const packages: Package[] = [
     },
 ];
 
+const queryParams = new URLSearchParams(window.location.search);
+window.history.replaceState({}, document.title, window.location.pathname);
 console.log("I'm here!");
 $(() => {
-    const queryParams = new URLSearchParams(window.location.search);
     //remove query params
-    window.history.replaceState({}, document.title, window.location.pathname);
     // const packageSelect = $("select.packageselect");
     const checkboxWrapper = $("div#styleSelection");
     const packageElements = getPackageElements();
