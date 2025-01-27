@@ -43,7 +43,7 @@ $(() => {
 
     packageElements.forEach((element, index) => {
         const button = element.find("a");
-        element.find("#price").text(`${packages[index].price.toLocaleString()}€`);
+        element.find("#price").find("h2").text(`${packages[index].price.toLocaleString()}€`);
         element.on("click", function () {
             maxOptions = packages[index].styles;
             const updateStyleAmount = packages[index].styles !== maxOptions;
