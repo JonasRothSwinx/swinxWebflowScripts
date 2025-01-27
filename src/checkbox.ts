@@ -101,30 +101,15 @@ function updatePrices(total: number) {
     // console.log({ preTaxText, taxText, totalText });
     const tax = Math.round((total / 119) * 1900) / 100;
     const preTax = total - tax;
-    preTaxText.text(
-        preTax.toLocaleString("de-DE", {
-            style: "currency",
-            currency: "EUR",
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-        })
-    );
-    taxText.text(
-        tax.toLocaleString("de-DE", {
-            style: "currency",
-            currency: "EUR",
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-        })
-    );
-    totalText.text(
-        total.toLocaleString("de-DE", {
-            style: "currency",
-            currency: "EUR",
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-        })
-    );
+    const options: Intl.NumberFormatOptions = {
+        style: "currency",
+        currency: "EUR",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    };
+    preTaxText.text(preTax.toLocaleString("de-DE", options));
+    taxText.text(tax.toLocaleString("de-DE", options));
+    totalText.text(total.toLocaleString("de-DE", options));
 }
 
 function setStyleTitle(index: number) {
