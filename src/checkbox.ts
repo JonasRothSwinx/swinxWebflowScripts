@@ -43,38 +43,43 @@ $(() => {
     //remove query params
     // const packageSelect = $("select.packageselect");
     const form = $<HTMLFormElement>("form#citegeist-posts-checkout");
-    form.attr("target", "_top");
+    form.attr("target", "_blank");
     form.attr("method", "post");
     form.attr("action", "https://www.paypal.com/cgi-bin/webscr");
 
     form.find("input").removeAttr("required");
     const checkboxWrapper = $("div#styleSelection");
     const packageElements = getPackageElements();
+    $().append(`<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+  <input type="hidden" name="cmd" value="_s-xclick" />
+  <input type="hidden" name="hosted_button_id" value="TL8T3PV37CKYA" />
+  <input type="hidden" name="currency_code" value="EUR" />
+  <input type="image" src="https://www.paypalobjects.com/de_DE/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" title="PayPal – Einfacher und sicherer online bezahlen." alt="Jetzt kaufen" />
+</form>`);
+    // const [cmd, hostedButtonId, currencyCode, submitButton] = [
+    //     $(`<input type="hidden" name="cmd" value="_s-xclick" />`),
+    //     $(`<input type="hidden" name="hosted_button_id" value="TL8T3PV37CKYA" />`),
+    //     $(`<input type="hidden" name="currency_code" value="EUR" />`),
+    //     $(
+    //         `<input
+    //         type="image"
+    //         src="https://www.paypalobjects.com/de_DE/i/btn/btn_buynowCC_LG.gif"
+    //         border="0"
+    //         name="submit"
+    //         title="PayPal – Einfacher und sicherer online bezahlen."
+    //         alt="Kauf Mich!!!"
+    //         style={{
+    //             width: "100%",
+    //             maxWidth: "150px",
+    //             height: "auto",
+    //             display: "block",
+    //             margin: "auto",
+    //         }}
 
-    const [cmd, hostedButtonId, currencyCode, submitButton] = [
-        $(`<input type="hidden" name="cmd" value="_s-xclick" />`),
-        $(`<input type="hidden" name="hosted_button_id" value="TL8T3PV37CKYA" />`),
-        $(`<input type="hidden" name="currency_code" value="EUR" />`),
-        $(
-            `<input
-            type="image"
-            src="https://www.paypalobjects.com/de_DE/i/btn/btn_buynowCC_LG.gif"
-            border="0"
-            name="submit"
-            title="PayPal – Einfacher und sicherer online bezahlen."
-            alt="Kauf Mich!!!"
-            style={{
-                width: "100%",
-                maxWidth: "150px",
-                height: "auto",
-                display: "block",
-                margin: "auto",
-            }}
-            
-        />`
-        ),
-    ];
-    form.append(cmd, hostedButtonId, currencyCode, submitButton);
+    //     />`
+    //     ),
+    // ];
+    // form.append(cmd, hostedButtonId, currencyCode, submitButton);
 
     form.on("submit", async function (event) {
         // event.preventDefault();
