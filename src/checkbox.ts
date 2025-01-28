@@ -64,6 +64,14 @@ $(() => {
     ];
     form.append(cmd, hostedButtonId, currencyCode, submitButton);
 
+    form.on("submit", async function (event) {
+        event.preventDefault();
+        const form = $(this);
+        const url = form.attr("action");
+        const data = form.serialize();
+        console.log({ url, data });
+    });
+
     // console.log($checkboxWrapper);
     // console.log(packageSelect);
     // console.log({ packageElements, $checkboxWrapper: checkboxWrapper });
