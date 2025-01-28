@@ -47,7 +47,7 @@ $(() => {
     form.attr("method", "post");
     form.attr("action", "https://www.paypal.com/cgi-bin/webscr");
 
-    form.find("input").attr("required", "false");
+    form.find("input").removeAttr("required");
     const checkboxWrapper = $("div#styleSelection");
     const packageElements = getPackageElements();
 
