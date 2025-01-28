@@ -42,14 +42,14 @@ getPackageElements().forEach((element, index) => {
 $(() => {
     //remove query params
     // const packageSelect = $("select.packageselect");
-    const form = $("form#citegeist-posts-checkout");
+    const form = $<HTMLFormElement>("form#citegeist-posts-checkout");
 
     const checkboxWrapper = $("div#styleSelection");
     const packageElements = getPackageElements();
 
     const [cmd, hostedButtonId, currencyCode, submitButton] = [
         $(`<input type="hidden" name="cmd" value="_s-xclick" />`),
-        $(`<input type="hidden" name="hosted_button_id" value="VBFPWKTVZ6VVN" />`),
+        $(`<input type="hidden" name="hosted_button_id" value="TL8T3PV37CKYA" />`),
         $(`<input type="hidden" name="currency_code" value="EUR" />`),
         $(
             `<input
@@ -66,10 +66,21 @@ $(() => {
 
     form.on("submit", async function (event) {
         event.preventDefault();
-        const form = $(this);
-        const url = form.attr("action");
+        const form = $<HTMLFormElement>(this);
+        // form.attr("target", "_top");
+        // form.attr("method", "post");
+        // form.attr("action", "https://www.paypal.com/cgi-bin/webscr");
+        const url = "https://www.paypal.com/cgi-bin/webscr";
         const data = form.serialize();
         console.log({ url, data });
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: data,
+        });
+        console.log(response);
     });
 
     // console.log($checkboxWrapper);
