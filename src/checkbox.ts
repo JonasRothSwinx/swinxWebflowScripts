@@ -47,6 +47,7 @@ $(() => {
     form.attr("method", "post");
     form.attr("action", "https://www.paypal.com/cgi-bin/webscr");
 
+    form.find("input").attr("required", "false");
     const checkboxWrapper = $("div#styleSelection");
     const packageElements = getPackageElements();
 
@@ -62,6 +63,13 @@ $(() => {
             name="submit"
             title="PayPal – Einfacher und sicherer online bezahlen."
             alt="Kauf Mich!!!"
+            style={{
+                width: "100%",
+                maxWidth: "150px",
+                height: "auto",
+                display: "block",
+                margin: "auto",
+            }}
             
         />`
         ),
@@ -69,22 +77,22 @@ $(() => {
     form.append(cmd, hostedButtonId, currencyCode, submitButton);
 
     form.on("submit", async function (event) {
-        event.preventDefault();
+        // event.preventDefault();
         const form = $<HTMLFormElement>(this);
         // form.attr("target", "_top");
         // form.attr("method", "post");
         // form.attr("action", "https://www.paypal.com/cgi-bin/webscr");
-        const url = "https://www.paypal.com/cgi-bin/webscr";
+        // const url = "https://www.paypal.com/cgi-bin/webscr";
         const data = form.serialize();
-        console.log({ url, data });
-        const response = await fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: data,
-        });
-        console.log(response);
+        console.log({ data });
+        // const response = await fetch(url, {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/x-www-form-urlencoded",
+        //     },
+        //     body: data,
+        // });
+        // console.log(response);
     });
 
     // console.log($checkboxWrapper);
@@ -144,7 +152,7 @@ function getPaypalButtons() {
 function showPaypalButton(index: number) {
     const buttons = getPaypalButtons();
     buttons.forEach((button, i) => {
-        if (i === index) {
+        if (false && i === index) {
             // button.css({ display: "block" });
             button.show();
         } else {
