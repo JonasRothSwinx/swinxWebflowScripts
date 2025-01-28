@@ -50,38 +50,15 @@ $(() => {
     form.find("input").removeAttr("required");
     const checkboxWrapper = $("div#styleSelection");
     const packageElements = getPackageElements();
-    packageElements[0].append(`
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+    const paypalForm =
+        $<HTMLFormElement>(`<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
             <input type="hidden" name="cmd" value="_s-xclick" />
             <input type="hidden" name="hosted_button_id" value="TL8T3PV37CKYA" />
             <input type="hidden" name="currency_code" value="EUR" />
             <input type="image" src="https://www.paypalobjects.com/de_DE/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" title="PayPal – Einfacher und sicherer online bezahlen." alt="Jetzt kaufen" />
         </form>`);
-    // const [cmd, hostedButtonId, currencyCode, submitButton] = [
-    //     $(`<input type="hidden" name="cmd" value="_s-xclick" />`),
-    //     $(`<input type="hidden" name="hosted_button_id" value="TL8T3PV37CKYA" />`),
-    //     $(`<input type="hidden" name="currency_code" value="EUR" />`),
-    //     $(
-    //         `<input
-    //         type="image"
-    //         src="https://www.paypalobjects.com/de_DE/i/btn/btn_buynowCC_LG.gif"
-    //         border="0"
-    //         name="submit"
-    //         title="PayPal – Einfacher und sicherer online bezahlen."
-    //         alt="Kauf Mich!!!"
-    //         style={{
-    //             width: "100%",
-    //             maxWidth: "150px",
-    //             height: "auto",
-    //             display: "block",
-    //             margin: "auto",
-    //         }}
-
-    //     />`
-    //     ),
-    // ];
-    // form.append(cmd, hostedButtonId, currencyCode, submitButton);
-
+    paypalForm.append(form.children());
+    form.hide();
     form.on("submit", async function (event) {
         event.preventDefault();
         const form = $<HTMLFormElement>(this);
@@ -91,15 +68,15 @@ $(() => {
         form.attr("method", "post");
         form.attr("action", url);
         console.log({ data });
-        // const response = await fetch(url, {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/x-www-form-urlencoded",
-        //     },
-        //     body: data,
-        // });
-        form.trigger("submit");
-        // console.log(response);
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: data,
+        });
+        // form.trigger("submit");
+        console.log(response);
     });
 
     // console.log($checkboxWrapper);
