@@ -60,7 +60,25 @@ $(() => {
     paypalForm.append(form.children());
     form.hide();
     $(".uui-contact02_component.w-form").append(paypalForm);
-    
+    paypalForm.on("submit", async function (event) {
+        event.preventDefault();
+        const form = $<HTMLFormElement>(this);
+        const url = "https://www.paypal.com/cgi-bin/webscr";
+        const data = form.serialize();
+        form.attr("target", "_blank");
+        form.attr("method", "post");
+        form.attr("action", url);
+        console.log({ data });
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: data,
+        });
+        // form.trigger("submit");
+        console.log(response);
+    });
     form.on("submit", async function (event) {
         event.preventDefault();
         const form = $<HTMLFormElement>(this);
