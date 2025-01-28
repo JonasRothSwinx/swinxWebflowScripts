@@ -50,7 +50,7 @@ $(() => {
     form.find("input").removeAttr("required");
     const checkboxWrapper = $("div#styleSelection");
     const packageElements = getPackageElements();
-    $().append(`<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+    packageElements[0].append(`<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
   <input type="hidden" name="cmd" value="_s-xclick" />
   <input type="hidden" name="hosted_button_id" value="TL8T3PV37CKYA" />
   <input type="hidden" name="currency_code" value="EUR" />
