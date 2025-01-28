@@ -43,6 +43,9 @@ $(() => {
     //remove query params
     // const packageSelect = $("select.packageselect");
     const form = $<HTMLFormElement>("form#citegeist-posts-checkout");
+    form.attr("target", "_top");
+    form.attr("method", "post");
+    form.attr("action", "https://www.paypal.com/cgi-bin/webscr");
 
     const checkboxWrapper = $("div#styleSelection");
     const packageElements = getPackageElements();
