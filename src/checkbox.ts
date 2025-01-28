@@ -51,7 +51,7 @@ $(() => {
     const checkboxWrapper = $("div#styleSelection");
     const packageElements = getPackageElements();
     const paypalForm =
-        $<HTMLFormElement>(`<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        $<HTMLFormElement>(`<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
             <input type="hidden" name="cmd" value="_s-xclick" />
             <input type="hidden" name="hosted_button_id" value="TL8T3PV37CKYA" />
             <input type="hidden" name="currency_code" value="EUR" />
@@ -60,25 +60,28 @@ $(() => {
     paypalForm.append(form.children());
     form.hide();
     $(".uui-contact02_component.w-form").append(paypalForm);
-    paypalForm.on("submit", async function (event) {
-        event.preventDefault();
-        const form = $<HTMLFormElement>(this);
-        const url = "https://www.paypal.com/cgi-bin/webscr";
-        const data = form.serialize();
-        form.attr("target", "_blank");
-        form.attr("method", "post");
-        form.attr("action", url);
-        console.log({ data });
-        const response = await fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: data,
-        });
-        // form.trigger("submit");
-        console.log(response);
+    paypalForm.on("success", function () {
+        console.log("success");
     });
+    // paypalForm.on("submit", async function (event) {
+    //     event.preventDefault();
+    //     const form = $<HTMLFormElement>(this);
+    //     const url = "https://www.paypal.com/cgi-bin/webscr";
+    //     const data = form.serialize();
+    //     form.attr("target", "_blank");
+    //     form.attr("method", "post");
+    //     form.attr("action", url);
+    //     console.log({ data });
+    //     const response = await fetch(url, {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/x-www-form-urlencoded",
+    //         },
+    //         body: data,
+    //     });
+    //     // form.trigger("submit");
+    //     console.log(response);
+    // });
     form.on("submit", async function (event) {
         event.preventDefault();
         const form = $<HTMLFormElement>(this);
