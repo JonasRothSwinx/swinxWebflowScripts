@@ -58,7 +58,8 @@ $(() => {
             border="0"
             name="submit"
             title="PayPal – Einfacher und sicherer online bezahlen."
-            alt="Jetzt kaufen"
+            alt="Kauf Mich!!!"
+            
         />`
         ),
     ];
