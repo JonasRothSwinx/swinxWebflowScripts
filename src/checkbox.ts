@@ -87,7 +87,7 @@ $(() => {
         const form = $<HTMLFormElement>(this);
         const url = "https://www.paypal.com/cgi-bin/webscr";
         const data = form.serialize();
-        form.attr("target", "blank");
+        form.attr("target", "_blank");
         form.attr("method", "post");
         form.attr("action", url);
         console.log({ data });
