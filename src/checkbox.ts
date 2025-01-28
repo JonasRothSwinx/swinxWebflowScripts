@@ -4,22 +4,26 @@ type Package = {
     name: string;
     price: number;
     styles: number;
+    payPalButtonId: string;
 };
 const packages: Package[] = [
     {
         name: "Starter",
         price: 9,
         styles: 2,
+        payPalButtonId: "6ZDCPESWBTF44",
     },
     {
         name: "Grow",
         price: 75,
         styles: 2,
+        payPalButtonId: "VBFPWKTVZ6VVN",
     },
     {
         name: "Scale",
         price: 150,
         styles: 2,
+        payPalButtonId: "JD23T65QBSGX2",
     },
 ];
 
@@ -38,8 +42,27 @@ getPackageElements().forEach((element, index) => {
 $(() => {
     //remove query params
     // const packageSelect = $("select.packageselect");
+    const form = $("form#citegeist-posts-checkout");
+
     const checkboxWrapper = $("div#styleSelection");
     const packageElements = getPackageElements();
+
+    const [cmd, hostedButtonId, currencyCode, submitButton] = [
+        $(`<input type="hidden" name="cmd" value="_s-xclick" />`),
+        $(`<input type="hidden" name="hosted_button_id" value="VBFPWKTVZ6VVN" />`),
+        $(`<input type="hidden" name="currency_code" value="EUR" />`),
+        $(
+            `<input
+            type="image"
+            src="https://www.paypalobjects.com/de_DE/i/btn/btn_buynowCC_LG.gif"
+            border="0"
+            name="submit"
+            title="PayPal – Einfacher und sicherer online bezahlen."
+            alt="Jetzt kaufen"
+        />`
+        ),
+    ];
+    form.append(cmd, hostedButtonId, currencyCode, submitButton);
 
     // console.log($checkboxWrapper);
     // console.log(packageSelect);
