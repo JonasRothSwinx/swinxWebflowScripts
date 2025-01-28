@@ -59,6 +59,8 @@ $(() => {
         </form>`);
     paypalForm.append(form.children());
     form.hide();
+    $(".uui-contact02_component.w-form").append(paypalForm);
+    
     form.on("submit", async function (event) {
         event.preventDefault();
         const form = $<HTMLFormElement>(this);
