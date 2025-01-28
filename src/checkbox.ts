@@ -50,12 +50,13 @@ $(() => {
     form.find("input").removeAttr("required");
     const checkboxWrapper = $("div#styleSelection");
     const packageElements = getPackageElements();
-    packageElements[0].append(`<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-  <input type="hidden" name="cmd" value="_s-xclick" />
-  <input type="hidden" name="hosted_button_id" value="TL8T3PV37CKYA" />
-  <input type="hidden" name="currency_code" value="EUR" />
-  <input type="image" src="https://www.paypalobjects.com/de_DE/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" title="PayPal – Einfacher und sicherer online bezahlen." alt="Jetzt kaufen" />
-</form>`);
+    packageElements[0].append(`
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick" />
+            <input type="hidden" name="hosted_button_id" value="TL8T3PV37CKYA" />
+            <input type="hidden" name="currency_code" value="EUR" />
+            <input type="image" src="https://www.paypalobjects.com/de_DE/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" title="PayPal – Einfacher und sicherer online bezahlen." alt="Jetzt kaufen" />
+        </form>`);
     // const [cmd, hostedButtonId, currencyCode, submitButton] = [
     //     $(`<input type="hidden" name="cmd" value="_s-xclick" />`),
     //     $(`<input type="hidden" name="hosted_button_id" value="TL8T3PV37CKYA" />`),
@@ -82,13 +83,13 @@ $(() => {
     // form.append(cmd, hostedButtonId, currencyCode, submitButton);
 
     form.on("submit", async function (event) {
-        // event.preventDefault();
+        event.preventDefault();
         const form = $<HTMLFormElement>(this);
-        // form.attr("target", "_top");
-        // form.attr("method", "post");
-        // form.attr("action", "https://www.paypal.com/cgi-bin/webscr");
-        // const url = "https://www.paypal.com/cgi-bin/webscr";
+        const url = "https://www.paypal.com/cgi-bin/webscr";
         const data = form.serialize();
+        form.attr("target", "blank");
+        form.attr("method", "post");
+        form.attr("action", url);
         console.log({ data });
         // const response = await fetch(url, {
         //     method: "POST",
@@ -97,6 +98,7 @@ $(() => {
         //     },
         //     body: data,
         // });
+        form.trigger("submit");
         // console.log(response);
     });
 
@@ -157,7 +159,7 @@ function getPaypalButtons() {
 function showPaypalButton(index: number) {
     const buttons = getPaypalButtons();
     buttons.forEach((button, i) => {
-        if (false && i === index) {
+        if (i === index) {
             // button.css({ display: "block" });
             button.show();
         } else {
