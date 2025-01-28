@@ -55,6 +55,7 @@ $(() => {
             <input type="hidden" name="cmd" value="_s-xclick" />
             <input type="hidden" name="hosted_button_id" value="TL8T3PV37CKYA" />
             <input type="hidden" name="currency_code" value="EUR" />
+            <input type="hidden" name="return" value=${window.location.href} />
             <!-- <input type="image" src="https://www.paypalobjects.com/de_DE/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" title="PayPal – Einfacher und sicherer online bezahlen." alt="Jetzt kaufen" /> -->
         </form>`);
     paypalForm.append(form.children());
