@@ -53,10 +53,10 @@ getPackageElements().forEach((element, index) => {
         })
     );
 });
-const paypalStyle =
-    $(`<style>.pp-4LBME9CH9HTK4{text-align:center;border:none;border-radius:0.25rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}</style>
-`);
-$("head").append(paypalStyle);
+// const paypalStyle =
+//     $(`<style>.pp-4LBME9CH9HTK4{text-align:center;border:none;border-radius:0.25rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}</style>
+// `);
+// $("head").append(paypalStyle);
 $(() => {
     //remove query params
     // const packageSelect = $("select.packageselect");
@@ -119,7 +119,7 @@ $(() => {
     //     $(button).insertAfter(checkboxWrapper);
     //     // button.insertAfter(checkboxWrapper);
     // });
-
+    let checkboxValues: string = "";
     packageElements.forEach((element, index) => {
         const button = element.find("a");
         element
@@ -141,7 +141,7 @@ $(() => {
 
     checkboxWrapper.find("input[type=checkbox]").on("change", function () {
         if (checkboxWrapper.find("input[type=checkbox]:checked").length > maxOptions) {
-            $(this).prop("checked", false).change();
+            $(this).prop("checked", false).trigger("change");
         }
 
         if (checkboxWrapper.find("input[type=checkbox]:checked").length === maxOptions) {
@@ -152,6 +152,10 @@ $(() => {
         } else {
             checkboxWrapper.find("label").css({ opacity: "", "pointer-events": "" });
         }
+        checkboxWrapper.find<HTMLInputElement>("input[type=checkbox]:checked").each((index, element) => {
+            checkboxValues += `${element.value},`;
+        });
+        console.log({ checkboxValues });
     });
 });
 
