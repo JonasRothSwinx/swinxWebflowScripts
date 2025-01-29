@@ -161,9 +161,15 @@ $(() => {
             .get()
             .join(", ");
         console.log({ checkboxValues });
+        updatePaypalText(checkboxValues, "none");
     });
 });
 
+function updatePaypalText(styles: string, email: string) {
+    const paypalText = $("#paypal-container").find("#memo");
+    const text = `Styles: ${styles}\nEmail: ${email}`;
+    paypalText.text(text);
+}
 function getPackageElements() {
     const [small, medium, large] = [$("div#paketSmall"), $("div#paketMedium"), $("div#paketLarge")];
     return [small, medium, large];
