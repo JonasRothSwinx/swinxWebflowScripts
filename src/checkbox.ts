@@ -60,7 +60,8 @@ $("head").append(
         background-color: dimgrey;
         color: linen;
         opacity: 1;
-        } 
+        }
+        </style>
     `)
 );
 // const paypalStyle =
