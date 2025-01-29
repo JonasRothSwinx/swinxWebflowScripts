@@ -210,6 +210,8 @@ function updatePaypalText() {
     const text = `Styles: ${styles.join(", ")} | LI: ${profile.replace(/http(s)*:\/\/www.linkedin.com\/in/, "")}`;
     console.log({ paypalText, text });
     paypalText.val(text);
+    paypalText.trigger("change");
+    paypalText.trigger("input");
     if (styles.length === 2 && profile) {
         setPaypalActive(true);
     } else {
