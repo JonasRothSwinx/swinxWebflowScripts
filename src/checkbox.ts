@@ -54,6 +54,15 @@ getPackageElements().forEach((element, index) => {
         })
     );
 });
+$("head").append(
+    $(`<style>
+       input[type=submit]:disabled {
+        background-color: dimgrey;
+        color: linen;
+        opacity: 1;
+        } 
+    `)
+);
 // const paypalStyle =
 //     $(`<style>.pp-4LBME9CH9HTK4{text-align:center;border:none;border-radius:0.25rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}</style>
 // `);
@@ -69,7 +78,7 @@ $(() => {
     // form.find("input").removeAttr("required");
     const checkboxWrapper = $("div#styleSelection");
     const packageElements = getPackageElements();
-
+    form.find("input[type=submit]");
     form.on("submit", async function (event) {
         event.preventDefault();
         const checkoutButton = $("#paypal-container").find("#checkout-button").trigger("click");
