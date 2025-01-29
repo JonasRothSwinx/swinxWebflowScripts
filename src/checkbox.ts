@@ -87,6 +87,7 @@ $(() => {
         // form.trigger("submit");
         console.log(response);
     });
+    const paypalContainer = $(`#paypal-container`);
 
     // console.log($checkboxWrapper);
     // console.log(packageSelect);
