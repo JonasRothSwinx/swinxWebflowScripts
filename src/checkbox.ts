@@ -26,6 +26,12 @@ const packages: Package[] = [
         styles: 2,
         payPalButtonId: "JD23T65QBSGX2",
     },
+    {
+        name: "Test",
+        price: 1,
+        styles: 2,
+        payPalButtonId: "4LBME9CH9HTK4",
+    },
 ];
 const paypalArgs = {
     clientId: "BAARHkwWKac6iakiXCQLoiMPwTcPa_Ixc_9l42dab1qa4rcydBMWd0khdE-PV2RNlhOTEKwIX1D8HukekU",
@@ -59,45 +65,6 @@ $(() => {
     form.find("input").removeAttr("required");
     const checkboxWrapper = $("div#styleSelection");
     const packageElements = getPackageElements();
-    loadScript(paypalArgs).then((paypal) => {
-        console.log("paypal loaded", paypal);
-    });
-
-    // const paypalContainer = $<HTMLDivElement>(`<div id="paypal-container-4LBME9CH9HTK4"></div>`);
-    //     const paypalButtonScript =
-    //         $<HTMLScriptElement>(`<style>.pp-4LBME9CH9HTK4{text-align:center;border:none;border-radius:0.25rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}</style>
-    // `);
-    //     const paypalForm =
-    //         $<HTMLFormElement>(`<form action="https://www.paypal.com/ncp/payment/4LBME9CH9HTK4" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
-    //                                 <input class="pp-4LBME9CH9HTK4" type="submit" value="Jetzt kaufen" />
-    //                                 <img src=https://www.paypalobjects.com/images/Debit_Credit_APM.svg alt="cards" />
-    //                                 <section> Abgewickelt durch <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
-    //                             </form>`);
-    //     paypalForm.append(form.children());
-    //     form.hide();
-    //     $(".uui-contact02_component.w-form").append(paypalForm);
-    //     paypalForm.on("success", function () {
-    //         console.log("success");
-    //     });
-    // paypalForm.on("submit", async function (event) {
-    //     event.preventDefault();
-    //     const form = $<HTMLFormElement>(this);
-    //     const url = "https://www.paypal.com/cgi-bin/webscr";
-    //     const data = form.serialize();
-    //     form.attr("target", "_blank");
-    //     form.attr("method", "post");
-    //     form.attr("action", url);
-    //     console.log({ data });
-    //     const response = await fetch(url, {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/x-www-form-urlencoded",
-    //         },
-    //         body: data,
-    //     });
-    //     // form.trigger("submit");
-    //     console.log(response);
-    // });
     form.on("submit", async function (event) {
         event.preventDefault();
         const form = $<HTMLFormElement>(this);
@@ -126,6 +93,18 @@ $(() => {
     const defaultIndex = parseInt(queryParams.get("pack") || "1", 10);
     let maxOptions = packages[defaultIndex].styles;
     setActivePackage(defaultIndex);
+
+    loadScript(paypalArgs).then((paypal) => {
+        if (!paypal) {
+            console.error("paypal not loaded");
+            return;
+        }
+        console.log("paypal loaded", paypal);
+        //@ts-ignore
+        const button = paypal.HostedButtons.render({ hostedButtonId: packages[defaultIndex].payPalButtonId });
+        button.insertAfter(checkboxWrapper);
+        console.log({ button });
+    });
 
     packageElements.forEach((element, index) => {
         const button = element.find("a");
