@@ -152,22 +152,25 @@ $(() => {
         } else {
             checkboxWrapper.find("label").css({ opacity: "", "pointer-events": "" });
         }
-        checkboxValues = checkboxWrapper
+
+        console.log({ checkboxValues });
+        updatePaypalText();
+    });
+});
+
+function updatePaypalText() {
+    const paypalText = $("#paypal-container").find<HTMLInputElement>("#memo");
+    const styles =
+        $("div#styleSelection")
             .find<HTMLInputElement>("input[type=checkbox]:checked")
             .map((index, element) => {
                 const span = $(element).siblings("span");
                 return span.text();
             })
             .get()
-            .join(", ");
-        console.log({ checkboxValues });
-        updatePaypalText(checkboxValues, "none");
-    });
-});
-
-function updatePaypalText(styles: string, email: string) {
-    const paypalText = $("#paypal-container").find<HTMLInputElement>("#memo");
-    const text = `Styles: ${styles}\nEmail: ${email}`;
+            .join(", ") ?? "none";
+    const email = $("input[type=email]").val() as string;
+    const text = `Styles: ${styles} - Email: ${email}`;
     console.log({ paypalText, text });
     paypalText.val(text);
 }
