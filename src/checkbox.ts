@@ -166,10 +166,10 @@ $(() => {
 });
 
 function updatePaypalText(styles: string, email: string) {
-    const paypalText = $("#paypal-container").find("#memo");
+    const paypalText = $("#paypal-container").find<HTMLInputElement>("#memo");
     const text = `Styles: ${styles}\nEmail: ${email}`;
     console.log({ paypalText, text });
-    paypalText.text(text);
+    paypalText.val(text);
 }
 function getPackageElements() {
     const [small, medium, large] = [$("div#paketSmall"), $("div#paketMedium"), $("div#paketLarge")];
