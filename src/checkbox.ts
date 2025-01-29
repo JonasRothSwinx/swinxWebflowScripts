@@ -175,7 +175,7 @@ function updatePaypalText() {
             .join(", ") ?? "none";
     const profile = $("input[name=Profil-Link]").val() as string;
     // const email = $("input[type=email]").val() as string;
-    const text = `Styles: ${styles} LI: ${profile}`;
+    const text = `Styles: ${styles} LI: ${profile.replace(/http(s)*:\/\/www.linkedin.com\/in\//, "")}`;
     console.log({ paypalText, text });
     paypalText.val(text);
 }
