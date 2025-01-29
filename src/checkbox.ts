@@ -69,6 +69,8 @@ $("head").append(
 // `);
 // $("head").append(paypalStyle);
 $(() => {
+    $<HTMLFormElement>("form#citegeist-posts-checkout").find("input[type=submit]").prop("disabled", true);
+    return;
     //remove query params
     // const packageSelect = $("select.packageselect");
     const form = $<HTMLFormElement>("form#citegeist-posts-checkout");
