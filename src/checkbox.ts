@@ -164,7 +164,7 @@ $(() => {
         $<HTMLFormElement>("form#citegeist-posts-checkout").find("input[type=submit]").prop("disabled", true);
         // setActivePaypal(defaultIndex);
     }, 10);
-
+    return;
     const observer = new MutationObserver((mutations) => {
         const form = $("#paypal-container form");
         if (form.length > 0) {
