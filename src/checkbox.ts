@@ -102,6 +102,9 @@ $(() => {
         console.log(response);
     });
     const paypalContainer = $(`#paypal-container`);
+    paypalContainer.on("DOMSubtreeModified", function () {
+        alert("changed");
+    });
     console.log({ paypalContainer });
     paypalContainer.hide();
     // console.log($checkboxWrapper);
