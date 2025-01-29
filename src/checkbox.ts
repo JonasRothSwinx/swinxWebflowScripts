@@ -157,34 +157,37 @@ $(() => {
                 .find("input[type=checkbox]:not(:checked)")
                 .closest("label")
                 .css({ opacity: "0.5", "pointer-events": "none" });
-            setPaypalActive(true);
+            // setPaypalActive(true);
         } else {
             checkboxWrapper.find("label").css({ opacity: "", "pointer-events": "" });
-            setPaypalActive(false);
+            // setPaypalActive(false);
         }
 
         console.log({ checkboxValues });
         updatePaypalText();
     });
-    setPaypalActive(false);
+    updatePaypalText();
 });
 
 function updatePaypalText() {
     const paypalText = $("#paypal-container").find<HTMLInputElement>("#memo");
-    const styles =
-        $("div#styleSelection")
-            .find<HTMLInputElement>("input[type=checkbox]:checked")
-            .map((index, element) => {
-                const span = $(element).siblings("span");
-                return span.text();
-            })
-            .get()
-            .join(", ") ?? "none";
+    const styles = $("div#styleSelection")
+        .find<HTMLInputElement>("input[type=checkbox]:checked")
+        .map((index, element) => {
+            const span = $(element).siblings("span");
+            return span.text();
+        })
+        .get();
     const profile = $("input[name=Profil-Link]").val() as string;
     // const email = $("input[type=email]").val() as string;
     const text = `Styles: ${styles} LI: ${profile.replace(/http(s)*:\/\/www.linkedin.com\/in/, "")}`;
     console.log({ paypalText, text });
     paypalText.val(text);
+    if (styles.length === 2 && profile) {
+        setPaypalActive(true);
+    } else {
+        setPaypalActive(false);
+    }
 }
 function getPackageElements() {
     const [small, medium, large] = [$("div#paketSmall"), $("div#paketMedium"), $("div#paketLarge")];
