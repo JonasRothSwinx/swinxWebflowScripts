@@ -12,19 +12,19 @@ const packages: Package[] = [
         name: "Starter",
         price: 9,
         styles: 2,
-        payPalButtonId: "6ZDCPESWBTF44",
+        payPalButtonId: "F9V6YHRE284LS",
     },
     {
         name: "Grow",
         price: 75,
         styles: 2,
-        payPalButtonId: "VBFPWKTVZ6VVN",
+        payPalButtonId: "NEMNJHHQPJP7E",
     },
     {
         name: "Scale",
         price: 150,
         styles: 2,
-        payPalButtonId: "JD23T65QBSGX2",
+        payPalButtonId: "JZZ5YHZPY7SUS",
     },
     {
         name: "Test",
@@ -33,6 +33,7 @@ const packages: Package[] = [
         payPalButtonId: "4LBME9CH9HTK4",
     },
 ];
+const paypalBaseUrl = "https://www.paypal.com/ncp/payment/";
 // const paypalArgs = {
 //     clientId: "BAARHkwWKac6iakiXCQLoiMPwTcPa_Ixc_9l42dab1qa4rcydBMWd0khdE-PV2RNlhOTEKwIX1D8HukekU",
 //     components: ["hosted-buttons"],
@@ -65,11 +66,14 @@ $(() => {
     form.attr("method", "post");
     form.attr("action", "https://www.paypal.com/cgi-bin/webscr");
 
-    form.find("input").removeAttr("required");
+    // form.find("input").removeAttr("required");
     const checkboxWrapper = $("div#styleSelection");
     const packageElements = getPackageElements();
+
     form.on("submit", async function (event) {
         event.preventDefault();
+        const checkoutButton = $("#paypal-container").find("#checkout-button").trigger("click");
+        return false;
         const form = $<HTMLFormElement>(this);
         const url = "https://www.paypal.com/cgi-bin/webscr";
         const data = form.serialize();
@@ -175,7 +179,7 @@ function updatePaypalText() {
             .join(", ") ?? "none";
     const profile = $("input[name=Profil-Link]").val() as string;
     // const email = $("input[type=email]").val() as string;
-    const text = `Styles: ${styles} LI: ${profile.replace(/http(s)*:\/\/www.linkedin.com\/in\//, "")}`;
+    const text = `Styles: ${styles} LI: ${profile.replace(/http(s)*:\/\/www.linkedin.com\/in/, "")}`;
     console.log({ paypalText, text });
     paypalText.val(text);
 }
@@ -238,5 +242,11 @@ function setActivePackage(index: number, updateStyleAmount = true) {
         setStyleTitle(index);
     }
     updatePrices(packages[index].price);
-    showPaypalButton(index);
+    // showPaypalButton(index);
+    setActivePaypal(index);
+}
+
+function setActivePaypal(index: number) {
+    const paypalContainer = $("#paypal-container");
+    paypalContainer.find("form").attr("action", `${paypalBaseUrl}${packages[index].payPalButtonId}`);
 }
