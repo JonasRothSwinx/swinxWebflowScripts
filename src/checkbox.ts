@@ -177,7 +177,7 @@ $(() => {
 });
 
 function updatePaypalText() {
-    const paypalText = $("#paypal-container").find<HTMLInputElement>("#memo");
+    const paypalText = $("#paypal-container").find<HTMLInputElement>("input[type=text]");
     const styles = $("div#styleSelection")
         .find<HTMLInputElement>("input[type=checkbox]:checked")
         .map((index, element) => {
