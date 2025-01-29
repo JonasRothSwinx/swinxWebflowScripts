@@ -69,9 +69,6 @@ $("head").append(
 // `);
 // $("head").append(paypalStyle);
 $(() => {
-    setTimeout(() => {
-        $<HTMLFormElement>("form#citegeist-posts-checkout").find("input[type=submit]").prop("disabled", true);
-    }, 100);
     //remove query params
     // const packageSelect = $("select.packageselect");
     const form = $<HTMLFormElement>("form#citegeist-posts-checkout");
@@ -180,7 +177,10 @@ $(() => {
         updatePaypalText();
     });
     updatePaypalText();
-    setPaypalActive(false);
+    setTimeout(() => {
+        $<HTMLFormElement>("form#citegeist-posts-checkout").find("input[type=submit]").prop("disabled", true);
+        setActivePaypal(defaultIndex);
+    }, 10);
 });
 
 function updatePaypalText() {
