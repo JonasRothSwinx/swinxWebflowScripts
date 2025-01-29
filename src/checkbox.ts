@@ -6,6 +6,7 @@ type Package = {
     price: number;
     styles: number;
     payPalButtonId: string;
+    checkoutButtonId: string;
 };
 const packages: Package[] = [
     {
@@ -13,24 +14,28 @@ const packages: Package[] = [
         price: 9,
         styles: 2,
         payPalButtonId: "F9V6YHRE284LS",
+        checkoutButtonId: "#paypal-small",
     },
     {
         name: "Grow",
         price: 75,
         styles: 2,
         payPalButtonId: "NEMNJHHQPJP7E",
+        checkoutButtonId: "#paypal-medium",
     },
     {
         name: "Scale",
         price: 150,
         styles: 2,
         payPalButtonId: "JZZ5YHZPY7SUS",
+        checkoutButtonId: "#paypal-large",
     },
     {
         name: "Test",
         price: 1,
         styles: 2,
         payPalButtonId: "4LBME9CH9HTK4",
+        checkoutButtonId: "#paypal-test",
     },
 ];
 const paypalBaseUrl = "https://www.paypal.com/ncp/payment/";
@@ -68,6 +73,7 @@ $("head").append(
 //     $(`<style>.pp-4LBME9CH9HTK4{text-align:center;border:none;border-radius:0.25rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}</style>
 // `);
 // $("head").append(paypalStyle);
+
 $(() => {
     //remove query params
     // const packageSelect = $("select.packageselect");
@@ -75,6 +81,7 @@ $(() => {
     form.attr("target", "_blank");
     form.attr("method", "post");
     form.attr("action", "https://www.paypal.com/cgi-bin/webscr");
+    let activePackage = parseInt(queryParams.get("pack") || "1", 10);
 
     // form.find("input").removeAttr("required");
     const checkboxWrapper = $("div#styleSelection");
@@ -82,7 +89,7 @@ $(() => {
     form.find("input[type=submit]");
     form.on("submit", async function (event) {
         event.preventDefault();
-        const checkoutButton = $("#paypal-container").find("#checkout-button").trigger("click");
+        const checkoutButton = $("#paypal-container").find(packages[activePackage].checkoutButtonId).trigger("click");
         return false;
         const form = $<HTMLFormElement>(this);
         const url = "https://www.paypal.com/cgi-bin/webscr";
@@ -112,7 +119,7 @@ $(() => {
     // console.log({ packageElements, $checkboxWrapper: checkboxWrapper });
 
     //initialize state
-    const defaultIndex = parseInt(queryParams.get("pack") || "1", 10);
+    const defaultIndex = activePackage;
     let maxOptions = packages[defaultIndex].styles;
     setActivePackage(defaultIndex);
 
@@ -132,6 +139,7 @@ $(() => {
         element.on("click", function () {
             maxOptions = packages[index].styles;
             const updateStyleAmount = packages[index].styles !== maxOptions;
+            activePackage = index;
             setActivePackage(index, updateStyleAmount);
         });
     });
