@@ -1,4 +1,5 @@
 import $ from "jquery";
+import { loadScript } from "@paypal/paypal-js";
 
 type Package = {
     name: string;
@@ -26,6 +27,13 @@ const packages: Package[] = [
         payPalButtonId: "JD23T65QBSGX2",
     },
 ];
+const paypalArgs = {
+    clientId: "BAARHkwWKac6iakiXCQLoiMPwTcPa_Ixc_9l42dab1qa4rcydBMWd0khdE-PV2RNlhOTEKwIX1D8HukekU",
+    components: ["hosted-buttons"],
+    currency: "EUR",
+    disableFunding: "venmo",
+};
+let paypal;
 
 const queryParams = new URLSearchParams(window.location.search);
 window.history.replaceState({}, document.title, window.location.pathname);
@@ -39,14 +47,7 @@ getPackageElements().forEach((element, index) => {
         })
     );
 });
-const paypalScript = `<script src="https://www.paypal.com/sdk/js?client-id=BAARHkwWKac6iakiXCQLoiMPwTcPa_Ixc_9l42dab1qa4rcydBMWd0khdE-PV2RNlhOTEKwIX1D8HukekU&components=hosted-buttons&disable-funding=venmo&currency=EUR"></script>
-<div id="paypal-container-4LBME9CH9HTK4"></div>
-<script>
-  paypal.HostedButtons({
-    hostedButtonId: "4LBME9CH9HTK4",
-  }).render("#paypal-container-4LBME9CH9HTK4")
-</script>`;
-$("body").append(paypalScript);
+
 $(() => {
     //remove query params
     // const packageSelect = $("select.packageselect");
@@ -58,8 +59,11 @@ $(() => {
     form.find("input").removeAttr("required");
     const checkboxWrapper = $("div#styleSelection");
     const packageElements = getPackageElements();
+    loadScript(paypalArgs).then((paypal) => {
+        console.log("paypal loaded", paypal);
+    });
 
-    const paypalContainer = $<HTMLDivElement>(`<div id="paypal-container-4LBME9CH9HTK4"></div>`);
+    // const paypalContainer = $<HTMLDivElement>(`<div id="paypal-container-4LBME9CH9HTK4"></div>`);
     //     const paypalButtonScript =
     //         $<HTMLScriptElement>(`<style>.pp-4LBME9CH9HTK4{text-align:center;border:none;border-radius:0.25rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}</style>
     // `);
