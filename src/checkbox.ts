@@ -93,7 +93,7 @@ $(() => {
     });
     const paypalContainer = $(`#paypal-container`);
     console.log({ paypalContainer });
-
+    paypalContainer.hide();
     // console.log($checkboxWrapper);
     // console.log(packageSelect);
     // console.log({ packageElements, $checkboxWrapper: checkboxWrapper });
@@ -157,13 +157,16 @@ $(() => {
                 .find("input[type=checkbox]:not(:checked)")
                 .closest("label")
                 .css({ opacity: "0.5", "pointer-events": "none" });
+            setPaypalActive(true);
         } else {
             checkboxWrapper.find("label").css({ opacity: "", "pointer-events": "" });
+            setPaypalActive(false);
         }
 
         console.log({ checkboxValues });
         updatePaypalText();
     });
+    setPaypalActive(false);
 });
 
 function updatePaypalText() {
@@ -204,6 +207,10 @@ function showPaypalButton(index: number) {
             button.hide();
         }
     });
+}
+function setPaypalActive(state: boolean) {
+    const submit = $<HTMLFormElement>("form#citegeist-posts-checkout").find("input[type=submit]");
+    submit.prop("disabled", !state);
 }
 
 function updatePrices(total: number) {
