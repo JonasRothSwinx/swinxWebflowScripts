@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { loadScript } from "@paypal/paypal-js";
+// import { loadScript } from "@paypal/paypal-js";
 
 type Package = {
     name: string;
@@ -33,13 +33,13 @@ const packages: Package[] = [
         payPalButtonId: "4LBME9CH9HTK4",
     },
 ];
-const paypalArgs = {
-    clientId: "BAARHkwWKac6iakiXCQLoiMPwTcPa_Ixc_9l42dab1qa4rcydBMWd0khdE-PV2RNlhOTEKwIX1D8HukekU",
-    components: ["hosted-buttons"],
-    currency: "EUR",
-    disableFunding: "venmo",
-};
-let paypal;
+// const paypalArgs = {
+//     clientId: "BAARHkwWKac6iakiXCQLoiMPwTcPa_Ixc_9l42dab1qa4rcydBMWd0khdE-PV2RNlhOTEKwIX1D8HukekU",
+//     components: ["hosted-buttons"],
+//     currency: "EUR",
+//     disableFunding: "venmo",
+// };
+// let paypal;
 
 const queryParams = new URLSearchParams(window.location.search);
 window.history.replaceState({}, document.title, window.location.pathname);
@@ -53,7 +53,10 @@ getPackageElements().forEach((element, index) => {
         })
     );
 });
-
+const paypalStyle =
+    $(`<style>.pp-4LBME9CH9HTK4{text-align:center;border:none;border-radius:0.25rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}</style>
+`);
+$("head").append(paypalStyle);
 $(() => {
     //remove query params
     // const packageSelect = $("select.packageselect");
@@ -93,21 +96,27 @@ $(() => {
     const defaultIndex = parseInt(queryParams.get("pack") || "1", 10);
     let maxOptions = packages[defaultIndex].styles;
     setActivePackage(defaultIndex);
-
-    loadScript(paypalArgs).then(async (paypal) => {
-        if (!paypal) {
-            console.error("paypal not loaded");
-            return;
-        }
-        console.log("paypal loaded", paypal);
-        const button = await paypal
-            //@ts-ignore
-            .HostedButtons({ hostedButtonId: packages[defaultIndex].payPalButtonId })
-            .render("#paypal-container-4LBME9CH9HTK4");
-        console.log({ button });
-        $(button).insertAfter(checkboxWrapper);
-        // button.insertAfter(checkboxWrapper);
-    });
+    const paypalForm =
+        $(`<form action="https://www.paypal.com/ncp/payment/4LBME9CH9HTK4" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+  <input class="pp-4LBME9CH9HTK4" type="submit" value="Jetzt kaufen" />
+  <img src=https://www.paypalobjects.com/images/Debit_Credit_APM.svg alt="cards" />
+  <section> Abgewickelt durch <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+</form>`);
+    paypalForm.insertAfter(checkboxWrapper.parent());
+    // loadScript(paypalArgs).then(async (paypal) => {
+    //     if (!paypal) {
+    //         console.error("paypal not loaded");
+    //         return;
+    //     }
+    //     console.log("paypal loaded", paypal);
+    //     const button = await paypal
+    //         //@ts-ignore
+    //         .HostedButtons({ hostedButtonId: packages[defaultIndex].payPalButtonId })
+    //         .render("#paypal-container-4LBME9CH9HTK4");
+    //     console.log({ button });
+    //     $(button).insertAfter(checkboxWrapper);
+    //     // button.insertAfter(checkboxWrapper);
+    // });
 
     packageElements.forEach((element, index) => {
         const button = element.find("a");
