@@ -189,9 +189,12 @@ function updatePaypalText() {
     // const email = $("input[type=email]").val() as string;
     const text = `Styles: ${styles.join(", ")} | LI: ${profile.replace(/http(s)*:\/\/www.linkedin.com\/in/, "")}`;
     console.log({ paypalText, text });
-    paypalText.val(text);
-    paypalText.trigger("change");
-    paypalText.trigger("input");
+    paypalText.each((x, element) => {
+        const query = $(element);
+        query.val(text);
+        query.trigger("change");
+        query.trigger("input");
+    });
     if (styles.length === 2 && profile) {
         setPaypalActive(true);
     } else {
