@@ -182,8 +182,18 @@ $(() => {
     updatePaypalText();
     setTimeout(() => {
         $<HTMLFormElement>("form#citegeist-posts-checkout").find("input[type=submit]").prop("disabled", true);
-        setActivePaypal(defaultIndex);
+        // setActivePaypal(defaultIndex);
     }, 10);
+
+    const observer = new MutationObserver((mutations) => {
+        const form = $("#paypal-container form");
+        if (form.length > 0) {
+            setActivePaypal(defaultIndex);
+            console.log("PP form found", form);
+            observer.disconnect();
+        }
+    });
+    observer.observe(paypalContainer[0], { childList: true, subtree: true });
 });
 
 function updatePaypalText() {
