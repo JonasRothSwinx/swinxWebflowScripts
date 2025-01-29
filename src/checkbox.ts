@@ -177,6 +177,7 @@ $(() => {
         updatePaypalText();
     });
     updatePaypalText();
+    setPaypalActive(false);
 });
 
 function updatePaypalText() {
@@ -190,7 +191,7 @@ function updatePaypalText() {
         .get();
     const profile = $("input[name=Profil-Link]").val() as string;
     // const email = $("input[type=email]").val() as string;
-    const text = `Styles: ${styles} LI: ${profile.replace(/http(s)*:\/\/www.linkedin.com\/in/, "")}`;
+    const text = `Styles: ${styles.join(", ")} | LI: ${profile.replace(/http(s)*:\/\/www.linkedin.com\/in/, "")}`;
     console.log({ paypalText, text });
     paypalText.val(text);
     if (styles.length === 2 && profile) {
