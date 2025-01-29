@@ -152,9 +152,14 @@ $(() => {
         } else {
             checkboxWrapper.find("label").css({ opacity: "", "pointer-events": "" });
         }
-        checkboxWrapper.find<HTMLInputElement>("input[type=checkbox]:checked").each((index, element) => {
-            checkboxValues += `${element.value},`;
-        });
+        checkboxValues = checkboxWrapper
+            .find<HTMLInputElement>("input[type=checkbox]:checked")
+            .map((index, element) => {
+                const span = $(element).siblings("span");
+                return span.text();
+            })
+            .get()
+            .join(", ");
         console.log({ checkboxValues });
     });
 });
