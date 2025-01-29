@@ -138,9 +138,11 @@ $(() => {
             setActivePackage(index, updateStyleAmount);
         });
     });
-    $("input[type=email]").on("change", function () {
+
+    $("input[name=Profil-Link]").on("change", function () {
         updatePaypalText();
     });
+
     checkboxWrapper.find("input[type=checkbox]").on("change", function () {
         if (checkboxWrapper.find("input[type=checkbox]:checked").length > maxOptions) {
             $(this).prop("checked", false).trigger("change");
@@ -171,8 +173,9 @@ function updatePaypalText() {
             })
             .get()
             .join(", ") ?? "none";
-    const email = $("input[type=email]").val() as string;
-    const text = `Styles: ${styles} - Email: ${email}`;
+    const profile = $("input[name=Profil-Link]").val() as string;
+    // const email = $("input[type=email]").val() as string;
+    const text = `Styles: ${styles} LI: `;
     console.log({ paypalText, text });
     paypalText.val(text);
 }
