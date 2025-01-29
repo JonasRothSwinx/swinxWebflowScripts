@@ -138,7 +138,9 @@ $(() => {
             setActivePackage(index, updateStyleAmount);
         });
     });
-
+    $("input[type=email]").on("change", function () {
+        updatePaypalText();
+    });
     checkboxWrapper.find("input[type=checkbox]").on("change", function () {
         if (checkboxWrapper.find("input[type=checkbox]:checked").length > maxOptions) {
             $(this).prop("checked", false).trigger("change");
