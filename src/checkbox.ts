@@ -101,7 +101,7 @@ $(() => {
         }
         console.log("paypal loaded", paypal);
         //@ts-ignore
-        const button = paypal.HostedButtons.render({ hostedButtonId: packages[defaultIndex].payPalButtonId });
+        const button = paypal.HostedButtons({ hostedButtonId: packages[defaultIndex].payPalButtonId }).render();
         button.insertAfter(checkboxWrapper);
         console.log({ button });
     });
