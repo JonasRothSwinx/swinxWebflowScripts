@@ -88,6 +88,7 @@ $(() => {
         console.log(response);
     });
     const paypalContainer = $(`#paypal-container`);
+    console.log({ paypalContainer });
 
     // console.log($checkboxWrapper);
     // console.log(packageSelect);
