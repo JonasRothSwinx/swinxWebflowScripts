@@ -94,14 +94,16 @@ $(() => {
     let maxOptions = packages[defaultIndex].styles;
     setActivePackage(defaultIndex);
 
-    loadScript(paypalArgs).then((paypal) => {
+    loadScript(paypalArgs).then(async (paypal) => {
         if (!paypal) {
             console.error("paypal not loaded");
             return;
         }
         console.log("paypal loaded", paypal);
-        //@ts-ignore
-        const button = paypal.HostedButtons({ hostedButtonId: packages[defaultIndex].payPalButtonId }).render();
+        const button = await paypal
+            //@ts-ignore
+            .HostedButtons({ hostedButtonId: packages[defaultIndex].payPalButtonId })
+            .render("#paypal-container-4LBME9CH9HTK4");
         console.log({ button });
         $(button).insertAfter(checkboxWrapper);
         // button.insertAfter(checkboxWrapper);
