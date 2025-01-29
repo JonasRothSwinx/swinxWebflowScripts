@@ -39,6 +39,14 @@ getPackageElements().forEach((element, index) => {
         })
     );
 });
+const paypalScript = `<script src="https://www.paypal.com/sdk/js?client-id=BAARHkwWKac6iakiXCQLoiMPwTcPa_Ixc_9l42dab1qa4rcydBMWd0khdE-PV2RNlhOTEKwIX1D8HukekU&components=hosted-buttons&disable-funding=venmo&currency=EUR"></script>
+<div id="paypal-container-4LBME9CH9HTK4"></div>
+<script>
+  paypal.HostedButtons({
+    hostedButtonId: "4LBME9CH9HTK4",
+  }).render("#paypal-container-4LBME9CH9HTK4")
+</script>`;
+$("body").append(paypalScript);
 $(() => {
     //remove query params
     // const packageSelect = $("select.packageselect");
@@ -50,21 +58,23 @@ $(() => {
     form.find("input").removeAttr("required");
     const checkboxWrapper = $("div#styleSelection");
     const packageElements = getPackageElements();
-    const paypalForm =
-        $<HTMLFormElement>(`<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-            <input type="hidden" name="cmd" value="_s-xclick" />
-            <input type="hidden" name="hosted_button_id" value="TL8T3PV37CKYA" />
-            <input type="hidden" name="currency_code" value="EUR" />
-            <input type="hidden" name="return" value=${window.location.href} />
-            <input type="hidden" name="cancel_return" value=${window.location.href} />
-            <input type="hidden" name="image_url" value="https://d3e54v103j8qbb.cloudfront.net/static/favicon_designer.88fce7c7f8.png 
-            </form>`);
-    paypalForm.append(form.children());
-    form.hide();
-    $(".uui-contact02_component.w-form").append(paypalForm);
-    paypalForm.on("success", function () {
-        console.log("success");
-    });
+
+    const paypalContainer = $<HTMLDivElement>(`<div id="paypal-container-4LBME9CH9HTK4"></div>`);
+    //     const paypalButtonScript =
+    //         $<HTMLScriptElement>(`<style>.pp-4LBME9CH9HTK4{text-align:center;border:none;border-radius:0.25rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}</style>
+    // `);
+    //     const paypalForm =
+    //         $<HTMLFormElement>(`<form action="https://www.paypal.com/ncp/payment/4LBME9CH9HTK4" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+    //                                 <input class="pp-4LBME9CH9HTK4" type="submit" value="Jetzt kaufen" />
+    //                                 <img src=https://www.paypalobjects.com/images/Debit_Credit_APM.svg alt="cards" />
+    //                                 <section> Abgewickelt durch <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+    //                             </form>`);
+    //     paypalForm.append(form.children());
+    //     form.hide();
+    //     $(".uui-contact02_component.w-form").append(paypalForm);
+    //     paypalForm.on("success", function () {
+    //         console.log("success");
+    //     });
     // paypalForm.on("submit", async function (event) {
     //     event.preventDefault();
     //     const form = $<HTMLFormElement>(this);
