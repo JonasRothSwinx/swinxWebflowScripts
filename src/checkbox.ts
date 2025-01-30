@@ -89,9 +89,12 @@ $(() => {
     form.find("input[type=submit]");
     form.on("submit", async function (event) {
         event.preventDefault();
-        const checkoutButton = $("#paypal-container")
-            .find(packages[activePackage].checkoutButtonId)
-            .trigger("click");
+        const checkoutButton = $("#paypal-container").find(
+            packages[activePackage].checkoutButtonId,
+        );
+
+        console.log({ checkoutButton });
+        checkoutButton.trigger("click");
         return false;
         const form = $<HTMLFormElement>(this);
         const url = "https://www.paypal.com/cgi-bin/webscr";
