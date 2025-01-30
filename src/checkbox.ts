@@ -89,9 +89,9 @@ $(() => {
     form.find("input[type=submit]");
     form.on("submit", async function (event) {
         event.preventDefault();
-        const checkoutButton = $("#paypal-container").find(
-            packages[activePackage].checkoutButtonId,
-        );
+        const checkoutButton = $("#paypal-container")
+            .find(packages[activePackage].checkoutButtonId)
+            .find("#checkout-button");
 
         console.log({ checkoutButton });
         checkoutButton.trigger("click");
