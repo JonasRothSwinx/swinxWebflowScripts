@@ -114,6 +114,7 @@ $(() => {
         console.log(response);
     });
     const paypalContainer = $(`#paypal-container`);
+    paypalContainer.hide();
 
     console.log({ paypalContainer });
     // paypalContainer.hide();
