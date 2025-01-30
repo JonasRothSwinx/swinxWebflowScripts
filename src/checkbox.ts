@@ -56,7 +56,7 @@ getPackageElements().forEach((element, index) => {
             style: "currency",
             currency: "EUR",
             minimumFractionDigits: 0,
-        })
+        }),
     );
 });
 $("head").append(
@@ -67,7 +67,7 @@ $("head").append(
         opacity: 1;
         }
         </style>
-    `)
+    `),
 );
 // const paypalStyle =
 //     $(`<style>.pp-4LBME9CH9HTK4{text-align:center;border:none;border-radius:0.25rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}</style>
@@ -89,7 +89,9 @@ $(() => {
     form.find("input[type=submit]");
     form.on("submit", async function (event) {
         event.preventDefault();
-        const checkoutButton = $("#paypal-container").find(packages[activePackage].checkoutButtonId).trigger("click");
+        const checkoutButton = $("#paypal-container")
+            .find(packages[activePackage].checkoutButtonId)
+            .trigger("click");
         return false;
         const form = $<HTMLFormElement>(this);
         const url = "https://www.paypal.com/cgi-bin/webscr";
@@ -109,9 +111,7 @@ $(() => {
         console.log(response);
     });
     const paypalContainer = $(`#paypal-container`);
-    paypalContainer.on("DOMSubtreeModified", function () {
-        alert("changed");
-    });
+
     console.log({ paypalContainer });
     // paypalContainer.hide();
     // console.log($checkboxWrapper);
@@ -133,7 +133,7 @@ $(() => {
                     style: "currency",
                     currency: "EUR",
                     minimumFractionDigits: 0,
-                })}`
+                })}`,
             )
             .show();
         element.on("click", function () {
@@ -169,7 +169,9 @@ $(() => {
     });
     updatePaypalText();
     setTimeout(() => {
-        $<HTMLFormElement>("form#citegeist-posts-checkout").find("input[type=submit]").prop("disabled", true);
+        $<HTMLFormElement>("form#citegeist-posts-checkout")
+            .find("input[type=submit]")
+            .prop("disabled", true);
         // setActivePaypal(defaultIndex);
     }, 10);
     return;
@@ -195,7 +197,10 @@ function updatePaypalText() {
         .get();
     const profile = $("input[name=Profil-Link]").val() as string;
     // const email = $("input[type=email]").val() as string;
-    const text = `Styles: ${styles.join(", ")} | LI: ${profile.replace(/http(s)*:\/\/www.linkedin.com\/in/, "")}`;
+    const text = `Styles: ${styles.join(", ")} | LI: ${profile.replace(
+        /http(s)*:\/\/www.linkedin.com\/in/,
+        "",
+    )}`;
     console.log({ paypalText, text });
     paypalText.each((x, element) => {
         const query = $(element);
@@ -257,7 +262,10 @@ function setStyleTitle(index: number) {
     const currentText = styleTitle.text();
     const targetStyleCount = packages[index].styles;
     //Replace 1-3 Style(s) with the current style amount. include the s if there is more than one style
-    const newText = currentText.replace(/\d+ Style(s)*/, `${targetStyleCount} Style${targetStyleCount > 0 ? "s" : ""}`);
+    const newText = currentText.replace(
+        /\d+ Style(s)*/,
+        `${targetStyleCount} Style${targetStyleCount > 0 ? "s" : ""}`,
+    );
     styleTitle.text(newText);
 }
 
@@ -278,5 +286,7 @@ function setActivePackage(index: number, updateStyleAmount = true) {
 
 function setActivePaypal(index: number) {
     const paypalContainer = $("#paypal-container");
-    paypalContainer.find("form").attr("action", `${paypalBaseUrl}${packages[index].payPalButtonId}`);
+    paypalContainer
+        .find("form")
+        .attr("action", `${paypalBaseUrl}${packages[index].payPalButtonId}`);
 }
